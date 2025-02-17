@@ -201,11 +201,11 @@ class ViT(nn.Module):
         batch_size, tokens, _ = img_patches.shape
   
         #-----------------------
-        #H = int(tokens**0.5)
-        #W = int(tokens**0.5)
-        #img_patches = img_patches.reshape(batch_size, H, W, _)
-        #img_patches=self.MOA(img_patches)
-        #img_patches = img_patches.reshape(batch_size, tokens, _)
+        H = int(tokens**0.5)
+        W = int(tokens**0.5)
+        img_patches = img_patches.reshape(batch_size, H, W, _)
+        img_patches=self.MOA(img_patches)
+        img_patches = img_patches.reshape(batch_size, tokens, _)
         project = self.projection(img_patches)
         token = repeat(self.cls_token, 'b ... -> (b batch_size) ...',
                        batch_size=batch_size)
